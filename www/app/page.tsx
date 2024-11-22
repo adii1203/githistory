@@ -107,7 +107,7 @@ export default function Home() {
   return (
     <div>
       <div>
-        <div className="space-y-2 w-[28rem] mx-auto">
+        <div className="space-y-2 w-[20rem] sm:w-[28rem] mx-auto">
           <div className="flex rounded-lg shadow-sm shadow-black/5">
             <Input
               id="input-21"
