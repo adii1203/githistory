@@ -33,7 +33,7 @@ func (s *APIServer) Serve() {
 
 func main() {
 	port := os.Getenv("PORT")
-	server := NewAPIServer(":"+port)
+	server := NewAPIServer("0.0.0.0:"+port)
 	server.Serve()
 }
 
