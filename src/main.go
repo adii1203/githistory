@@ -53,7 +53,7 @@ func handelHistory(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	owner := strings.Split(repo, "/")[0]
-	_, err := api.GetRepoLogoUrl(owner, token)
+	logoUrl, err := api.GetRepoLogoUrl(owner, token)
 	if err != nil {
 		returnErr(w, err.Code, err.Message)
 		return
@@ -75,10 +75,16 @@ func handelHistory(w http.ResponseWriter, r *http.Request) {
 	// collect stars record
 	record := api.GetRepoStargazers(repo, token, 15, totalPageCount, totalStars)
 
+	response := map[string]interface{}{
+		"total_stars": totalStars,
+		"logo_url":    logoUrl,
+		"data": 	  record,
+		"name":        repo,
+	}
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(record)
-	return
+	json.NewEncoder(w).Encode(response)
+	
 }
 
 func returnErr(w http.ResponseWriter, code int, message string) {
