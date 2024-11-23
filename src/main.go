@@ -2,12 +2,14 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/gorilla/mux"
 	"log"
 	"net/http"
+	"os"
 	"src/api"
 	"strconv"
 	"strings"
+
+	"github.com/gorilla/mux"
 )
 
 type APIServer struct {
@@ -30,8 +32,8 @@ func (s *APIServer) Serve() {
 }
 
 func main() {
-	//port := os.Getenv("PORT")
-	server := NewAPIServer(":3000")
+	port := os.Getenv("PORT")
+	server := NewAPIServer(":"+port)
 	server.Serve()
 }
 
