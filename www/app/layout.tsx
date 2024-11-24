@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import localFont from "next/font/local";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "gitgraph",
@@ -23,10 +24,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${Space.className} antialiased`}>
         <div className="flex min-h-screen flex-col">
-          <main className="flex-1 flex items-center justify-center">
+          <main className="flex-1 flex">
             <div className="container max-w-2xl mx-auto px-4  text-center">
               <section>{children}</section>
             </div>
+            <Toaster />
           </main>
           <footer className="border-t">
             <div className="flex items-center justify-center py-2">
