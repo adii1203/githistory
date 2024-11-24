@@ -117,7 +117,9 @@ export default function Home() {
       setData(res.data);
       console.log(res.data);
     } catch (error) {
-      toast.error(error?.response.data.message || "Something went wrong");
+      const err = error as { response: { data: { message: string } } };
+      const msg = err.response?.data?.message;
+      toast.error(msg || "Something went wrong");
       console.log(error);
       setLoading(false);
     } finally {
