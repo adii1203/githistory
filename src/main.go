@@ -48,6 +48,8 @@ func handelHistory(w http.ResponseWriter, r *http.Request) {
 	repo := r.URL.Query().Get("repo")
 	token := r.Header.Get("Authorization")
 
+	fmt.Println("client token: ", token)
+
 	if repo == "" {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusBadRequest)
@@ -62,6 +64,8 @@ func handelHistory(w http.ResponseWriter, r *http.Request) {
 	if token == "" {
 		token = fmt.Sprintf("Bearer %s", os.Getenv("GITHUB_TOKEN"))
 	}
+
+	fmt.Println(token)
 
 	owner := strings.Split(repo, "/")[0]
 	logoUrl, err := api.GetRepoLogoUrl(owner, token)
