@@ -16,6 +16,12 @@ type APIServer struct {
 	listenAdd string
 }
 
+func main() {
+	port := os.Getenv("PORT")
+	server := NewAPIServer("0.0.0.0:"+port)
+	server.Serve()
+}
+
 func NewAPIServer(listenAdd string) *APIServer {
 	return &APIServer{
 		listenAdd: listenAdd,
@@ -29,12 +35,6 @@ func (s *APIServer) Serve() {
 
 	log.Println("Listening on " + s.listenAdd)
 	log.Fatal(http.ListenAndServe(s.listenAdd, router))
-}
-
-func main() {
-	port := os.Getenv("PORT")
-	server := NewAPIServer("0.0.0.0:"+port)
-	server.Serve()
 }
 
 func handelHistory(w http.ResponseWriter, r *http.Request) {
@@ -73,7 +73,12 @@ func handelHistory(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// collect stars record
-	record := api.GetRepoStargazers(repo, token, 15, totalPageCount, totalStars)
+	record, err := api.GetRepoStargazers(repo, token, 15, totalPageCount, totalStars)
+
+	if err != nil {
+		returnErr(w, err.Code, err.Message)
+		return
+	}
 
 	response := map[string]interface{}{
 		"total_stars": totalStars,
@@ -95,5 +100,4 @@ func returnErr(w http.ResponseWriter, code int, message string) {
 		"code":    strconv.Itoa(code),
 	}
 	json.NewEncoder(w).Encode(res)
-
 }
