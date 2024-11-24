@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -9,6 +10,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 )
 
@@ -30,11 +32,15 @@ func NewAPIServer(listenAdd string) *APIServer {
 
 func (s *APIServer) Serve() {
 	router := mux.NewRouter()
+	credentials := handlers.AllowCredentials()
+	methods := handlers.AllowedMethods([]string{"GET"})
+	origins := handlers.AllowedOrigins([]string{"*"})
+	headers := handlers.AllowedHeaders([]string{"Authorization"})
 
 	router.HandleFunc("/history", handelHistory)
 
 	log.Println("Listening on " + s.listenAdd)
-	log.Fatal(http.ListenAndServe(s.listenAdd, router))
+	log.Fatal(http.ListenAndServe(s.listenAdd, handlers.CORS(credentials, origins, methods, headers)(router)))
 }
 
 func handelHistory(w http.ResponseWriter, r *http.Request) {
@@ -52,6 +58,11 @@ func handelHistory(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(res)
 		return
 	}
+
+	if token == "" {
+		token = fmt.Sprintf("Bearer %s", os.Getenv("GITHUB_TOKEN"))
+	}
+
 	owner := strings.Split(repo, "/")[0]
 	logoUrl, err := api.GetRepoLogoUrl(owner, token)
 	if err != nil {
