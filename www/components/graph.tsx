@@ -104,7 +104,8 @@ text-xs
                   <YAxis axisLine={false} tickLine={false} dataKey={"stars"} />
                   <Tooltip />
                   <Line
-                    type={"natural"}
+                    type={"linear"}
+                    dot={false}
                     legendType="line"
                     strokeWidth={3}
                     strokeLinecap="round"
