@@ -111,7 +111,7 @@ export default function Home() {
         {
           // withCredentials: true,
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: token && `Bearer ${token}`,
           },
         }
       );
