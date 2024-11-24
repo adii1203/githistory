@@ -110,7 +110,7 @@ export default function Home() {
         {
           // withCredentials: true,
           headers: {
-            Authorization: `Bearer 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`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
