@@ -61,7 +61,7 @@ func handelHistory(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if token == " " {
+	if token == "" {
 		token = fmt.Sprintf("Bearer %s", os.Getenv("GITHUB_TOKEN"))
 	}
 
