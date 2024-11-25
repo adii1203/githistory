@@ -51,7 +51,7 @@ function ProfileButton() {
     <Button
       variant={"ghost"}
       className="rounded-full h-7 py-0 ps-0 items-center justify-center">
-      <Link target="_blank" href={"https://github.com/adii1203"}>
+      <Link target="_blank" href={"https://x.com/adiidev12"}>
         <div className="flex items-center">
           <div className="w-8 aspect-square h-full p-1.5">
             <Image
