@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import React, { useRef } from "react";
 import {
   CartesianGrid,
@@ -55,7 +54,7 @@ const Graph = ({ data }: { data: ChartData }) => {
             <div className="flex flex-1 flex-col justify-center gap-1 px-2 py-4">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-full overflow-hidden">
-                  <Image
+                  <img
                     src={data.logo_url}
                     alt="repo image"
                     width={40}
