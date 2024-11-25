@@ -124,7 +124,7 @@ text-xs
           variant={"ghost"}
           size={"icon"}
           className="rounded-full absolute right-10 top-16"
-          onClick={() => exportAsImage(divRef.current, "dub")}>
+          onClick={() => exportAsImage(divRef.current, data.name)}>
           <Download size={16} />
         </Button>
       </div>
