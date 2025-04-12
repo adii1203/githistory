@@ -26,80 +26,11 @@ export default function Home() {
     if (token) {
       setToken(token);
     }
+
+    getData("golang/go");
   }, []);
 
   const [data, setData] = useState<ChartData>();
-  //   {
-  //   data: [
-  //     {
-  //       date: "Dec 2014",
-  //       stars: 0,
-  //     },
-  //     {
-  //       date: "Jul 2017",
-  //       stars: 5250,
-  //     },
-  //     {
-  //       date: "Jul 2016",
-  //       stars: 7920,
-  //     },
-  //     {
-  //       date: "Mar 2018",
-  //       stars: 10590,
-  //     },
-  //     {
-  //       date: "Jan 2017",
-  //       stars: 13260,
-  //     },
-  //     {
-  //       date: "Oct 2016",
-  //       stars: 15930,
-  //     },
-  //     {
-  //       date: "Mar 2016",
-  //       stars: 18600,
-  //     },
-  //     {
-  //       date: "Jul 2015",
-  //       stars: 21270,
-  //     },
-  //     {
-  //       date: "Feb 2015",
-  //       stars: 23940,
-  //     },
-  //     {
-  //       date: "Dec 2017",
-  //       stars: 26610,
-  //     },
-  //     {
-  //       date: "May 2018",
-  //       stars: 29280,
-  //     },
-  //     {
-  //       date: "Jul 2018",
-  //       stars: 31950,
-  //     },
-  //     {
-  //       date: "Apr 2017",
-  //       stars: 34620,
-  //     },
-  //     {
-  //       date: "Nov 2015",
-  //       stars: 37290,
-  //     },
-  //     {
-  //       date: "Oct 2017",
-  //       stars: 39960,
-  //     },
-  //     {
-  //       date: "Nov 2024",
-  //       stars: 124227,
-  //     },
-  //   ],
-  //   logo_url: "https://avatars.githubusercontent.com/u/4314092?v=4",
-  //   name: "golang/go",
-  //   total_stars: 124227,
-  // }
 
   const [loading, setLoading] = useState(false);
 
@@ -107,7 +38,7 @@ export default function Home() {
     try {
       setLoading(true);
       const res = await axios.get(
-        `https://api.gitgraph.fun/history?repo=${repo}`,
+        `https://githistory-production-92ae.up.railway.app/history?repo=${repo}`,
         {
           // withCredentials: true,
           headers: {
