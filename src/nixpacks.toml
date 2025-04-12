@@ -1,0 +1,5 @@
+[phases.build]
+cmds = ['''GOOS=linux GOARCH=amd64 go build -o=./bin/api main.go''']
+
+[start]
+cmd = './bin/api'
